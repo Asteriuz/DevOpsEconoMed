@@ -1,0 +1,1230 @@
+{
+    "info": {
+        "_postman_id": "8c6b8a32-3d99-49c0-8255-ff22a137aedd",
+        "name": "EconomedAzure",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Cliente",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/clientes",
+                            "path": [
+                                "clientes"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2NDU5ODIwfQ.cApDAwFJnWtctkEaRJjs41QQ4lARZ00PViQ2iZXuzBY",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "FindById",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/clientes/1",
+                            "path": [
+                                "clientes",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/clientes",
+                            "path": [
+                                "clientes"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"rg\": \"123456789\",\n  \"sexo\": \"M\",\n  \"nome\": \"Augusto Barcelos Barros\",\n  \"telefone\": \"11223344\",\n  \"email\": \"joao.silva@email.com\",\n  \"dataNascimento\": \"1990-01-01\",\n  \"cpf\": \"123.456.789-00\",\n  \"estadoCivilId\": 1,\n  \"convenioId\": 1,\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": \"123\",\n    \"cep\": \"12345-678\",\n    \"cidadeId\": 1\n  },\n  \"historicoHospital\": {\n    \"historicoMedico\": \"Cirurgia de apendicite em 2015\",\n    \"examesRealizados\": \"Exames de rotina\",\n    \"medicamentosPrescritos\": \"Paracetamol\",\n    \"observacoes\": \"Nenhuma observação\"\n  }\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/clientes/1",
+                            "path": [
+                                "clientes",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"rg\": \"123456789\",\n  \"nome\": \"João Vô\",\n  \"telefone\": \"11223344\",\n  \"email\": \"joao.silva@email.com\",\n  \"dataNascimento\": \"1990-01-01\",\n  \"cpf\": \"123.456.789-00\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/clientes/6",
+                            "path": [
+                                "clientes",
+                                "6"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "HistoricoHospital",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/historicos_hospital_cliente",
+                            "path": [
+                                "historicos_hospital_cliente"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "FindById",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/historicos_hospital_cliente/1",
+                            "path": [
+                                "historicos_hospital_cliente",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "HistoricoSaude",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/historicos_saude_cliente",
+                            "path": [
+                                "historicos_saude_cliente"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "FindById",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/historicos_saude_cliente/1",
+                            "path": [
+                                "historicos_saude_cliente",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Convenio",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/convenios",
+                            "path": [
+                                "convenios"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "FindById",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/convenios/1",
+                            "path": [
+                                "convenios",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/convenios",
+                            "path": [
+                                "convenios"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"nome\": \"Convenio C\",\n  \"empresaId\": 1,\n  \"valor\": 500.0,\n  \"tipoServico\": \"Consulta Médica\",\n  \"cobertura\": \"Consultas e exames básicos\",\n  \"contato\": \"contato@convenioa.com\",\n  \"validade\": \"2025-12-31\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/convenios/1",
+                            "path": [
+                                "convenios",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"nome\": \"Convenio E\",\n  \"valor\": 500.0,\n  \"tipoServico\": \"Consulta Médica\",\n  \"cobertura\": \"Consultas e exames básicos\",\n  \"contato\": \"contato@convenioa.com\",\n  \"validade\": \"2025-12-31\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/convenios/6",
+                            "path": [
+                                "convenios",
+                                "6"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Empresa",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/empresas",
+                            "path": [
+                                "empresas"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "FindById",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/empresas/1",
+                            "path": [
+                                "empresas",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/empresas",
+                            "path": [
+                                "empresas"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n    \"cnpj\": \"12345678901234\",\n    \"nome\": \"Empresa J\",\n    \"tipo\": \"Saúde\",\n    \"telefone\": \"11223344\",\n    \"email\": \"empresa.x@email.com\",\n    \"areaAtuacao\": \"Atendimento médico\"\n  }"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/empresas/1",
+                            "path": [
+                                "empresas",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n    \"cnpj\": \"12345678901234\",\n    \"nome\": \"Empresa Porto Seguro\",\n    \"tipo\": \"Saúde\",\n    \"telefone\": \"11223344\",\n    \"email\": \"empresa.x@email.com\",\n    \"areaAtuacao\": \"Atendimento médico\"\n  }"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/empresas/6",
+                            "path": [
+                                "empresas",
+                                "6"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Unidade",
+            "item": [
+                {
+                    "name": "List",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/unidades",
+                            "path": [
+                                "unidades"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "FindById",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/unidades/1",
+                            "path": [
+                                "unidades",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/unidades",
+                            "path": [
+                                "unidades"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"empresaId\": 1,\n  \"nome\": \"Unidade Z\",\n  \"telefone\": \"11223344\",\n  \"email\": \"unidade.a@email.com\",\n  \"tipo\": \"Hospital\",\n  \"capacidade\": 100,\n  \"especialidades\": \"Cardiologia, Ortopedia\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/unidades/1",
+                            "path": [
+                                "unidades",
+                                "1"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"nome\": \"Unidade Amaral\",\n  \"telefone\": \"11223344\",\n  \"email\": \"unidade.a@email.com\",\n  \"tipo\": \"Hospital\",\n  \"capacidade\": 500,\n  \"especialidades\": \"Cardiologia, Ortopedia\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "https://economeddb.azurewebsites.net/unidades/6",
+                            "path": [
+                                "unidades",
+                                "6"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "economeddb",
+                                "azurewebsites",
+                                "net"
+                            ]
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Endereco",
+            "item": [
+                {
+                    "name": "Estado",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/estados",
+                                    "path": [
+                                        "estados"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "FindById",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/estados/8",
+                                    "path": [
+                                        "estados",
+                                        "8"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/estados",
+                                    "path": [
+                                        "estados"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"nome\": \"São Paulo\"\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/estados/1",
+                                    "path": [
+                                        "estados",
+                                        "1"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"nome\": \"Sao Paulo\"\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/estados/1",
+                                    "path": [
+                                        "estados",
+                                        "1"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Cidade",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/cidades",
+                                    "path": [
+                                        "cidades"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create",
+                            "request": {
+                                "method": "POST",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/cidades",
+                                    "path": [
+                                        "cidades"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"estado_id\": 8,\n  \"nome\": \"Barueri\"\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Update",
+                            "request": {
+                                "method": "PUT",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/cidades/3",
+                                    "path": [
+                                        "cidades",
+                                        "3"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "body": {
+                                    "mode": "raw",
+                                    "options": {
+                                        "raw": {
+                                            "language": "json"
+                                        }
+                                    },
+                                    "raw": "{\n  \"nome\": \"Sao Paulo\",\n  \"estado_id\": 8\n}"
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Delete",
+                            "request": {
+                                "method": "DELETE",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/cidades/1",
+                                    "path": [
+                                        "cidades",
+                                        "1"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "EnderecoCliente",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/enderecos_cliente",
+                                    "path": [
+                                        "enderecos_cliente"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "FindById",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/enderecos_cliente/1",
+                                    "path": [
+                                        "enderecos_cliente",
+                                        "1"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "EnderecoUnidade",
+                    "item": [
+                        {
+                            "name": "List",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/enderecos_unidade",
+                                    "path": [
+                                        "enderecos_unidade"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "FindById",
+                            "request": {
+                                "method": "GET",
+                                "url": {
+                                    "raw": "https://economeddb.azurewebsites.net/enderecos_unidade/1",
+                                    "path": [
+                                        "enderecos_unidade",
+                                        "1"
+                                    ],
+                                    "protocol": "https",
+                                    "host": [
+                                        "economeddb",
+                                        "azurewebsites",
+                                        "net"
+                                    ]
+                                },
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJFY29ub21lZCIsInN1YiI6ImFkbWluIiwiZXhwIjoxNzI2MDk4MDUwfQ.ylImGHuaVS0s966WlPyM07wtiTMN_mNU8166Us4G120",
+                                            "type": "string"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

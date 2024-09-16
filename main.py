@@ -1,4 +1,3 @@
-# main.py
 from fastapi import FastAPI, Depends
 from sqlalchemy import (
     create_engine,
@@ -298,6 +297,7 @@ def get_db():
         db.close()
 
 
+# Rotas
 @app.get("/")
 def read_root():
     return {"message": "Bem-vindo a API da EconoMed"}
