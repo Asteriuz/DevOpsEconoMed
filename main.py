@@ -318,6 +318,29 @@ def create_estado(estado: EstadoRequest, db=Depends(get_db)):
     return novo_estado
 
 
+@app.get("/estados/{estado_id}")
+def get_estado(estado_id: int, db=Depends(get_db)):
+    estado = db.query(Estado).filter(Estado.id == estado_id).first()
+    return estado
+
+
+@app.put("/estados/{estado_id}")
+def update_estado(estado_id: int, estado: EstadoRequest, db=Depends(get_db)):
+    estado = db.query(Estado).filter(Estado.id == estado_id).first()
+    estado.nome = estado.nome
+    db.commit()
+    db.refresh(estado)
+    return estado
+
+
+@app.delete("/estados/{estado_id}")
+def delete_estado(estado_id: int, db=Depends(get_db)):
+    estado = db.query(Estado).filter(Estado.id == estado_id).first()
+    db.delete(estado)
+    db.commit()
+    return {"message": "Estado deletado com sucesso"}
+
+
 @app.get("/cidades/")
 def get_cidades(db=Depends(get_db)):
     cidades = db.query(Cidade).all()
@@ -330,7 +353,35 @@ def create_cidade(cidade: CidadeRequest, db=Depends(get_db)):
     db.add(nova_cidade)
     db.commit()
     db.refresh(nova_cidade)
-    return nova_cidade
+    return
+
+
+@app.get("/cidades/{cidade_id}")
+def get_cidade(cidade_id: int, db=Depends(get_db)):
+    cidade = db.query(Cidade).filter(Cidade.id == cidade_id).first()
+    return cidade
+
+
+@app.put("/cidades/{cidade_id}")
+def update_cidade(cidade_id: int, cidade: CidadeRequest, db=Depends(get_db)):
+    cidade = db.query(Cidade).filter(Cidade.id == cidade_id).first()
+    cidade.nome = cidade.nome
+    db.commit()
+    db.refresh(cidade)
+    return cidade
+
+
+@app.delete("/cidades/{cidade_id}")
+def delete_cidade(cidade_id: int, db=Depends(get_db)):
+    cidade = db.query(Cidade).filter(Cidade.id == cidade_id).first()
+    db.delete(cidade)
+    db.commit()
+    return {"message": "Cidade deletada com sucesso"}
+
+@app.get("/cidades/estado/{estado_id}")
+def get_cidades_estado(estado_id: int, db=Depends(get_db)):
+    cidades = db.query(Cidade).filter(Cidade.estado_id == estado_id).all()
+    return cidades
 
 
 @app.get("/empresas/")
@@ -602,6 +653,8 @@ def create_historico_hospital_cliente(
     db.refresh(novo_historico_hospital_cliente)
     return novo_historico_hospital_cliente
 
+
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
