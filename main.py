@@ -300,13 +300,19 @@ def get_db():
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"message": "Bem-vindo a API da EconoMed"}
 
 
 @app.get("/estados/")
 def get_estados(db=Depends(get_db)):
     estados = db.query(Estado).all()
     return estados
+
+
+@app.get("/estados/{estado_id}")
+def get_estado(estado_id: int, db=Depends(get_db)):
+    estado = db.query(Estado).filter(Estado.id == estado_id).first()
+    return estado
 
 
 @app.post("/estados/")
@@ -316,12 +322,6 @@ def create_estado(estado: EstadoRequest, db=Depends(get_db)):
     db.commit()
     db.refresh(novo_estado)
     return novo_estado
-
-
-@app.get("/estados/{estado_id}")
-def get_estado(estado_id: int, db=Depends(get_db)):
-    estado = db.query(Estado).filter(Estado.id == estado_id).first()
-    return estado
 
 
 @app.put("/estados/{estado_id}")
@@ -347,6 +347,12 @@ def get_cidades(db=Depends(get_db)):
     return cidades
 
 
+@app.get("/cidades/{cidade_id}")
+def get_cidade(cidade_id: int, db=Depends(get_db)):
+    cidade = db.query(Cidade).filter(Cidade.id == cidade_id).first()
+    return cidade
+
+
 @app.post("/cidades/")
 def create_cidade(cidade: CidadeRequest, db=Depends(get_db)):
     nova_cidade = Cidade(nome=cidade.nome, estado_id=cidade.estado_id)
@@ -354,12 +360,6 @@ def create_cidade(cidade: CidadeRequest, db=Depends(get_db)):
     db.commit()
     db.refresh(nova_cidade)
     return
-
-
-@app.get("/cidades/{cidade_id}")
-def get_cidade(cidade_id: int, db=Depends(get_db)):
-    cidade = db.query(Cidade).filter(Cidade.id == cidade_id).first()
-    return cidade
 
 
 @app.put("/cidades/{cidade_id}")
@@ -378,6 +378,7 @@ def delete_cidade(cidade_id: int, db=Depends(get_db)):
     db.commit()
     return {"message": "Cidade deletada com sucesso"}
 
+
 @app.get("/cidades/estado/{estado_id}")
 def get_cidades_estado(estado_id: int, db=Depends(get_db)):
     cidades = db.query(Cidade).filter(Cidade.estado_id == estado_id).all()
@@ -388,6 +389,12 @@ def get_cidades_estado(estado_id: int, db=Depends(get_db)):
 def get_empresas(db=Depends(get_db)):
     empresas = db.query(Empresa).all()
     return empresas
+
+
+@app.get("/empresas/{empresa_id}")
+def get_empresa(empresa_id: int, db=Depends(get_db)):
+    empresa = db.query(Empresa).filter(Empresa.id == empresa_id).first()
+    return empresa
 
 
 @app.post("/empresas/")
@@ -405,10 +412,37 @@ def create_empresa(empresa: EmpresaRequest, db=Depends(get_db)):
     return nova_empresa
 
 
+@app.put("/empresas/{empresa_id}")
+def update_empresa(empresa_id: int, empresa: EmpresaRequest, db=Depends(get_db)):
+    empresa = db.query(Empresa).filter(Empresa.id == empresa_id).first()
+    empresa.cnpj = empresa.cnpj
+    empresa.nome = empresa.nome
+    empresa.tipo = empresa.tipo
+    empresa.telefone = empresa.telefone
+    empresa.email = empresa.email
+    db.commit()
+    db.refresh(empresa)
+    return empresa
+
+
+@app.delete("/empresas/{empresa_id}")
+def delete_empresa(empresa_id: int, db=Depends(get_db)):
+    empresa = db.query(Empresa).filter(Empresa.id == empresa_id).first()
+    db.delete(empresa)
+    db.commit()
+    return {"message": "Empresa deletada com sucesso"}
+
+
 @app.get("/convenios/")
 def get_convenios(db=Depends(get_db)):
     convenios = db.query(Convenio).all()
     return convenios
+
+
+@app.get("/convenios/{convenio_id}")
+def get_convenio(convenio_id: int, db=Depends(get_db)):
+    convenio = db.query(Convenio).filter(Convenio.id == convenio_id).first()
+    return convenio
 
 
 @app.post("/convenios/")
@@ -428,10 +462,41 @@ def create_convenio(convenio: ConvenioRequest, db=Depends(get_db)):
     return novo_convenio
 
 
+@app.put("/convenios/{convenio_id}")
+def update_convenio(convenio_id: int, convenio: ConvenioRequest, db=Depends(get_db)):
+    convenio = db.query(Convenio).filter(Convenio.id == convenio_id).first()
+    convenio.empresa_id = convenio.empresa_id
+    convenio.nome = convenio.nome
+    convenio.valor = convenio.valor
+    convenio.tipo_servico = convenio.tipo_servico
+    convenio.cobertura = convenio.cobertura
+    convenio.contato = convenio.contato
+    convenio.validade = convenio.validade
+    db.commit()
+    db.refresh(convenio)
+    return convenio
+
+
+@app.delete("/convenios/{convenio_id}")
+def delete_convenio(convenio_id: int, db=Depends(get_db)):
+    convenio = db.query(Convenio).filter(Convenio.id == convenio_id).first()
+    db.delete(convenio)
+    db.commit()
+    return {"message": "Convenio deletado com sucesso"}
+
+
 @app.get("/areas_atuacao/")
 def get_areas_atuacao(db=Depends(get_db)):
     areas_atuacao = db.query(AreaAtuacao).all()
     return areas_atuacao
+
+
+@app.get("/areas_atuacao/{area_atuacao_id}")
+def get_area_atuacao(area_atuacao_id: int, db=Depends(get_db)):
+    area_atuacao = (
+        db.query(AreaAtuacao).filter(AreaAtuacao.id == area_atuacao_id).first()
+    )
+    return area_atuacao
 
 
 @app.post("/areas_atuacao/")
@@ -443,10 +508,39 @@ def create_area_atuacao(area_atuacao: AreaAtuacaoRequest, db=Depends(get_db)):
     return nova_area_atuacao
 
 
+@app.put("/areas_atuacao/{area_atuacao_id}")
+def update_area_atuacao(
+    area_atuacao_id: int, area_atuacao: AreaAtuacaoRequest, db=Depends(get_db)
+):
+    area_atuacao = (
+        db.query(AreaAtuacao).filter(AreaAtuacao.id == area_atuacao_id).first()
+    )
+    area_atuacao.nome = area_atuacao.nome
+    db.commit()
+    db.refresh(area_atuacao)
+    return area_atuacao
+
+
+@app.delete("/areas_atuacao/{area_atuacao_id}")
+def delete_area_atuacao(area_atuacao_id: int, db=Depends(get_db)):
+    area_atuacao = (
+        db.query(AreaAtuacao).filter(AreaAtuacao.id == area_atuacao_id).first()
+    )
+    db.delete(area_atuacao)
+    db.commit()
+    return {"message": "Area de atuacao deletada com sucesso"}
+
+
 @app.get("/unidades/")
 def get_unidades(db=Depends(get_db)):
     unidades = db.query(Unidade).all()
     return unidades
+
+
+@app.get("/unidades/{unidade_id}")
+def get_unidade(unidade_id: int, db=Depends(get_db)):
+    unidade = db.query(Unidade).filter(Unidade.id == unidade_id).first()
+    return unidade
 
 
 @app.post("/unidades/")
@@ -466,10 +560,43 @@ def create_unidade(unidade: UnidadeRequest, db=Depends(get_db)):
     return nova_unidade
 
 
+@app.put("/unidades/{unidade_id}")
+def update_unidade(unidade_id: int, unidade: UnidadeRequest, db=Depends(get_db)):
+    unidade = db.query(Unidade).filter(Unidade.id == unidade_id).first()
+    unidade.empresa_id = unidade.empresa_id
+    unidade.area_atuacao_id = unidade.area_atuacao_id
+    unidade.nome = unidade.nome
+    unidade.telefone = unidade.telefone
+    unidade.email = unidade.email
+    unidade.tipo = unidade.tipo
+    unidade.capacidade = unidade.capacidade
+    db.commit()
+    db.refresh(unidade)
+    return unidade
+
+
+@app.delete("/unidades/{unidade_id}")
+def delete_unidade(unidade_id: int, db=Depends(get_db)):
+    unidade = db.query(Unidade).filter(Unidade.id == unidade_id).first()
+    db.delete(unidade)
+    db.commit()
+    return {"message": "Unidade deletada com sucesso"}
+
+
 @app.get("/enderecos_unidade/")
 def get_enderecos_unidade(db=Depends(get_db)):
     enderecos_unidade = db.query(EnderecoUnidade).all()
     return enderecos_unidade
+
+
+@app.get("/enderecos_unidade/{endereco_unidade_id}")
+def get_endereco_unidade(endereco_unidade_id: int, db=Depends(get_db)):
+    endereco_unidade = (
+        db.query(EnderecoUnidade)
+        .filter(EnderecoUnidade.id == endereco_unidade_id)
+        .first()
+    )
+    return endereco_unidade
 
 
 @app.post("/enderecos_unidade/")
@@ -489,10 +616,49 @@ def create_endereco_unidade(
     return novo_endereco_unidade
 
 
+@app.put("/enderecos_unidade/{endereco_unidade_id}")
+def update_endereco_unidade(
+    endereco_unidade_id: int,
+    endereco_unidade: EnderecoUnidadeRequest,
+    db=Depends(get_db),
+):
+    endereco_unidade = (
+        db.query(EnderecoUnidade)
+        .filter(EnderecoUnidade.id == endereco_unidade_id)
+        .first()
+    )
+    endereco_unidade.unidade_id = endereco_unidade.unidade_id
+    endereco_unidade.rua = endereco_unidade.rua
+    endereco_unidade.numero = endereco_unidade.numero
+    endereco_unidade.cep = endereco_unidade.cep
+    endereco_unidade.cidade_id = endereco_unidade.cidade_id
+    db.commit()
+    db.refresh(endereco_unidade)
+    return endereco_unidade
+
+
+@app.delete("/enderecos_unidade/{endereco_unidade_id}")
+def delete_endereco_unidade(endereco_unidade_id: int, db=Depends(get_db)):
+    endereco_unidade = (
+        db.query(EnderecoUnidade)
+        .filter(EnderecoUnidade.id == endereco_unidade_id)
+        .first()
+    )
+    db.delete(endereco_unidade)
+    db.commit()
+    return {"message": "Endereco da unidade deletado com sucesso"}
+
+
 @app.get("/medicos/")
 def get_medicos(db=Depends(get_db)):
     medicos = db.query(Medico).all()
     return medicos
+
+
+@app.get("/medicos/{medico_id}")
+def get_medico(medico_id: int, db=Depends(get_db)):
+    medico = db.query(Medico).filter(Medico.id == medico_id).first()
+    return medico
 
 
 @app.post("/medicos/")
@@ -510,10 +676,39 @@ def create_medico(medico: MedicoRequest, db=Depends(get_db)):
     return novo_medico
 
 
+@app.put("/medicos/{medico_id}")
+def update_medico(medico_id: int, medico: MedicoRequest, db=Depends(get_db)):
+    medico = db.query(Medico).filter(Medico.id == medico_id).first()
+    medico.nome = medico.nome
+    medico.telefone = medico.telefone
+    medico.email = medico.email
+    medico.especialidade = medico.especialidade
+    medico.crm = medico.crm
+    db.commit()
+    db.refresh(medico)
+    return medico
+
+
+@app.delete("/medicos/{medico_id}")
+def delete_medico(medico_id: int, db=Depends(get_db)):
+    medico = db.query(Medico).filter(Medico.id == medico_id).first()
+    db.delete(medico)
+    db.commit()
+    return {"message": "Medico deletado com sucesso"}
+
+
 @app.get("/medicos_unidade/")
 def get_medicos_unidade(db=Depends(get_db)):
     medicos_unidade = db.query(MedicoUnidade).all()
     return medicos_unidade
+
+
+@app.get("/medicos_unidade/{medico_unidade_id}")
+def get_medico_unidade(medico_unidade_id: int, db=Depends(get_db)):
+    medico_unidade = (
+        db.query(MedicoUnidade).filter(MedicoUnidade.id == medico_unidade_id).first()
+    )
+    return medico_unidade
 
 
 @app.post("/medicos_unidade/")
@@ -529,10 +724,43 @@ def create_medico_unidade(medico_unidade: MedicoUnidadeRequest, db=Depends(get_d
     return novo_medico_unidade
 
 
+@app.put("/medicos_unidade/{medico_unidade_id}")
+def update_medico_unidade(
+    medico_unidade_id: int, medico_unidade: MedicoUnidadeRequest, db=Depends(get_db)
+):
+    medico_unidade = (
+        db.query(MedicoUnidade).filter(MedicoUnidade.id == medico_unidade_id).first()
+    )
+    medico_unidade.medico_id = medico_unidade.medico_id
+    medico_unidade.unidade_id = medico_unidade.unidade_id
+    medico_unidade.horario_atendimento = medico_unidade.horario_atendimento
+    db.commit()
+    db.refresh(medico_unidade)
+    return medico_unidade
+
+
+@app.delete("/medicos_unidade/{medico_unidade_id}")
+def delete_medico_unidade(medico_unidade_id: int, db=Depends(get_db)):
+    medico_unidade = (
+        db.query(MedicoUnidade).filter(MedicoUnidade.id == medico_unidade_id).first()
+    )
+    db.delete(medico_unidade)
+    db.commit()
+    return {"message": "Medico da unidade deletado com sucesso"}
+
+
 @app.get("/estados_civis/")
 def get_estados_civis(db=Depends(get_db)):
     estados_civis = db.query(EstadoCivil).all()
     return estados_civis
+
+
+@app.get("/estados_civis/{estado_civil_id}")
+def get_estado_civil(estado_civil_id: int, db=Depends(get_db)):
+    estado_civil = (
+        db.query(EstadoCivil).filter(EstadoCivil.id == estado_civil_id).first()
+    )
+    return estado_civil
 
 
 @app.post("/estados_civis/")
@@ -544,10 +772,39 @@ def create_estado_civil(estado_civil: EstadoCivilRequest, db=Depends(get_db)):
     return novo_estado_civil
 
 
+@app.put("/estados_civis/{estado_civil_id}")
+def update_estado_civil(
+    estado_civil_id: int, estado_civil: EstadoCivilRequest, db=Depends(get_db)
+):
+    estado_civil = (
+        db.query(EstadoCivil).filter(EstadoCivil.id == estado_civil_id).first()
+    )
+    estado_civil.nome = estado_civil.nome
+    db.commit()
+    db.refresh(estado_civil)
+    return estado_civil
+
+
+@app.delete("/estados_civis/{estado_civil_id}")
+def delete_estado_civil(estado_civil_id: int, db=Depends(get_db)):
+    estado_civil = (
+        db.query(EstadoCivil).filter(EstadoCivil.id == estado_civil_id).first()
+    )
+    db.delete(estado_civil)
+    db.commit()
+    return {"message": "Estado civil deletado com sucesso"}
+
+
 @app.get("/clientes/")
 def get_clientes(db=Depends(get_db)):
     clientes = db.query(Cliente).all()
     return clientes
+
+
+@app.get("/clientes/{cliente_id}")
+def get_cliente(cliente_id: int, db=Depends(get_db)):
+    cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+    return cliente
 
 
 @app.post("/clientes/")
@@ -569,10 +826,45 @@ def create_cliente(cliente: ClienteRequest, db=Depends(get_db)):
     return novo_cliente
 
 
+@app.put("/clientes/{cliente_id}")
+def update_cliente(cliente_id: int, cliente: ClienteRequest, db=Depends(get_db)):
+    cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+    cliente.rg = cliente.rg
+    cliente.nome = cliente.nome
+    cliente.sexo = cliente.sexo
+    cliente.telefone = cliente.telefone
+    cliente.email = cliente.email
+    cliente.data_nascimento = cliente.data_nascimento
+    cliente.cpf = cliente.cpf
+    cliente.convenio_id = cliente.convenio_id
+    cliente.estado_civil_id = cliente.estado_civil_id
+    db.commit()
+    db.refresh(cliente)
+    return cliente
+
+
+@app.delete("/clientes/{cliente_id}")
+def delete_cliente(cliente_id: int, db=Depends(get_db)):
+    cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+    db.delete(cliente)
+    db.commit()
+    return {"message": "Cliente deletado com sucesso"}
+
+
 @app.get("/enderecos_cliente/")
 def get_enderecos_cliente(db=Depends(get_db)):
     enderecos_cliente = db.query(EnderecoCliente).all()
     return enderecos_cliente
+
+
+@app.get("/enderecos_cliente/{endereco_cliente_id}")
+def get_endereco_cliente(endereco_cliente_id: int, db=Depends(get_db)):
+    endereco_cliente = (
+        db.query(EnderecoCliente)
+        .filter(EnderecoCliente.id == endereco_cliente_id)
+        .first()
+    )
+    return endereco_cliente
 
 
 @app.post("/enderecos_cliente/")
@@ -592,10 +884,49 @@ def create_endereco_cliente(
     return novo_endereco_cliente
 
 
+@app.put("/enderecos_cliente/{endereco_cliente_id}")
+def update_endereco_cliente(
+    endereco_cliente_id: int,
+    endereco_cliente: EnderecoClienteRequest,
+    db=Depends(get_db),
+):
+    endereco_cliente = (
+        db.query(EnderecoCliente)
+        .filter(EnderecoCliente.id == endereco_cliente_id)
+        .first()
+    )
+    endereco_cliente.cliente_id = endereco_cliente.cliente_id
+    endereco_cliente.rua = endereco_cliente.rua
+    endereco_cliente.numero = endereco_cliente.numero
+    endereco_cliente.cep = endereco_cliente.cep
+    endereco_cliente.cidade_id = endereco_cliente.cidade_id
+    db.commit()
+    db.refresh(endereco_cliente)
+    return endereco_cliente
+
+
+@app.delete("/enderecos_cliente/{endereco_cliente_id}")
+def delete_endereco_cliente(endereco_cliente_id: int, db=Depends(get_db)):
+    endereco_cliente = (
+        db.query(EnderecoCliente)
+        .filter(EnderecoCliente.id == endereco_cliente_id)
+        .first()
+    )
+    db.delete(endereco_cliente)
+    db.commit()
+    return {"message": "Endereco do cliente deletado com sucesso"}
+
+
 @app.get("/comorbidades/")
 def get_comorbidades(db=Depends(get_db)):
     comorbidades = db.query(Comorbidade).all()
     return comorbidades
+
+
+@app.get("/comorbidades/{comorbidade_id}")
+def get_comorbidade(comorbidade_id: int, db=Depends(get_db)):
+    comorbidade = db.query(Comorbidade).filter(Comorbidade.id == comorbidade_id).first()
+    return comorbidade
 
 
 @app.post("/comorbidades/")
@@ -607,10 +938,39 @@ def create_comorbidade(comorbidade: ComorbidadeRequest, db=Depends(get_db)):
     return nova_comorbidade
 
 
+@app.put("/comorbidades/{comorbidade_id}")
+def update_comorbidade(
+    comorbidade_id: int, comorbidade: ComorbidadeRequest, db=Depends(get_db)
+):
+    comorbidade = db.query(Comorbidade).filter(Comorbidade.id == comorbidade_id).first()
+    comorbidade.nome = comorbidade.nome
+    db.commit()
+    db.refresh(comorbidade)
+    return comorbidade
+
+
+@app.delete("/comorbidades/{comorbidade_id}")
+def delete_comorbidade(comorbidade_id: int, db=Depends(get_db)):
+    comorbidade = db.query(Comorbidade).filter(Comorbidade.id == comorbidade_id).first()
+    db.delete(comorbidade)
+    db.commit()
+    return {"message": "Comorbidade deletada com sucesso"}
+
+
 @app.get("/historicos_saude_cliente/")
 def get_historicos_saude_cliente(db=Depends(get_db)):
     historicos_saude_cliente = db.query(HistoricoSaudeCliente).all()
     return historicos_saude_cliente
+
+
+@app.get("/historicos_saude_cliente/{historico_saude_cliente_id}")
+def get_historico_saude_cliente(historico_saude_cliente_id: int, db=Depends(get_db)):
+    historico_saude_cliente = (
+        db.query(HistoricoSaudeCliente)
+        .filter(HistoricoSaudeCliente.id == historico_saude_cliente_id)
+        .first()
+    )
+    return historico_saude_cliente
 
 
 @app.post("/historicos_saude_cliente/")
@@ -630,10 +990,55 @@ def create_historico_saude_cliente(
     return novo_historico_saude_cliente
 
 
+@app.put("/historicos_saude_cliente/{historico_saude_cliente_id}")
+def update_historico_saude_cliente(
+    historico_saude_cliente_id: int,
+    historico_saude_cliente: HistoricoSaudeClienteRequest,
+    db=Depends(get_db),
+):
+    historico_saude_cliente = (
+        db.query(HistoricoSaudeCliente)
+        .filter(HistoricoSaudeCliente.id == historico_saude_cliente_id)
+        .first()
+    )
+    historico_saude_cliente.cliente_id = historico_saude_cliente.cliente_id
+    historico_saude_cliente.comorbidade_id = historico_saude_cliente.comorbidade_id
+    historico_saude_cliente.data_registro = historico_saude_cliente.data_registro
+    historico_saude_cliente.fuma = historico_saude_cliente.fuma
+    historico_saude_cliente.observacoes = historico_saude_cliente.observacoes
+    db.commit()
+    db.refresh(historico_saude_cliente)
+    return historico_saude_cliente
+
+
+@app.delete("/historicos_saude_cliente/{historico_saude_cliente_id}")
+def delete_historico_saude_cliente(historico_saude_cliente_id: int, db=Depends(get_db)):
+    historico_saude_cliente = (
+        db.query(HistoricoSaudeCliente)
+        .filter(HistoricoSaudeCliente.id == historico_saude_cliente_id)
+        .first()
+    )
+    db.delete(historico_saude_cliente)
+    db.commit()
+    return {"message": "Histórico de saúde do cliente deletado com sucesso"}
+
+
 @app.get("/historicos_hospital_cliente/")
 def get_historicos_hospital_cliente(db=Depends(get_db)):
     historicos_hospital_cliente = db.query(HistoricoHospitalCliente).all()
     return historicos_hospital_cliente
+
+
+@app.get("/historicos_hospital_cliente/{historico_hospital_cliente_id}")
+def get_historico_hospital_cliente(
+    historico_hospital_cliente_id: int, db=Depends(get_db)
+):
+    historico_hospital_cliente = (
+        db.query(HistoricoHospitalCliente)
+        .filter(HistoricoHospitalCliente.id == historico_hospital_cliente_id)
+        .first()
+    )
+    return historico_hospital_cliente
 
 
 @app.post("/historicos_hospital_cliente/")
@@ -652,6 +1057,48 @@ def create_historico_hospital_cliente(
     db.commit()
     db.refresh(novo_historico_hospital_cliente)
     return novo_historico_hospital_cliente
+
+
+@app.put("/historicos_hospital_cliente/{historico_hospital_cliente_id}")
+def update_historico_hospital_cliente(
+    historico_hospital_cliente_id: int,
+    historico_hospital_cliente: HistoricoHospitalClienteRequest,
+    db=Depends(get_db),
+):
+    historico_hospital_cliente = (
+        db.query(HistoricoHospitalCliente)
+        .filter(HistoricoHospitalCliente.id == historico_hospital_cliente_id)
+        .first()
+    )
+    historico_hospital_cliente.cliente_id = historico_hospital_cliente.cliente_id
+    historico_hospital_cliente.data_registro = historico_hospital_cliente.data_registro
+    historico_hospital_cliente.historico_medico = (
+        historico_hospital_cliente.historico_medico
+    )
+    historico_hospital_cliente.exames_realizados = (
+        historico_hospital_cliente.exames_realizados
+    )
+    historico_hospital_cliente.medicamentos_prescritos = (
+        historico_hospital_cliente.medicamentos_prescritos
+    )
+    historico_hospital_cliente.observacoes = historico_hospital_cliente.observacoes
+    db.commit()
+    db.refresh(historico_hospital_cliente)
+    return historico_hospital_cliente
+
+
+@app.delete("/historicos_hospital_cliente/{historico_hospital_cliente_id}")
+def delete_historico_hospital_cliente(
+    historico_hospital_cliente_id: int, db=Depends(get_db)
+):
+    historico_hospital_cliente = (
+        db.query(HistoricoHospitalCliente)
+        .filter(HistoricoHospitalCliente.id == historico_hospital_cliente_id)
+        .first()
+    )
+    db.delete(historico_hospital_cliente)
+    db.commit()
+    return {"message": "Histórico hospitalar do cliente deletado com sucesso"}
 
 
 if __name__ == "__main__":
