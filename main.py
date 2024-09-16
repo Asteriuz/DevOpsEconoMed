@@ -325,9 +325,9 @@ def create_estado(estado: EstadoRequest, db=Depends(get_db)):
 
 
 @app.put("/estados/{estado_id}")
-def update_estado(estado_id: int, estado: EstadoRequest, db=Depends(get_db)):
+def update_estado(estado_id: int, estado_request: EstadoRequest, db=Depends(get_db)):
     estado = db.query(Estado).filter(Estado.id == estado_id).first()
-    estado.nome = estado.nome
+    estado.nome = estado_request.nome
     db.commit()
     db.refresh(estado)
     return estado
@@ -363,9 +363,9 @@ def create_cidade(cidade: CidadeRequest, db=Depends(get_db)):
 
 
 @app.put("/cidades/{cidade_id}")
-def update_cidade(cidade_id: int, cidade: CidadeRequest, db=Depends(get_db)):
+def update_cidade(cidade_id: int, cidade_request: CidadeRequest, db=Depends(get_db)):
     cidade = db.query(Cidade).filter(Cidade.id == cidade_id).first()
-    cidade.nome = cidade.nome
+    cidade.nome = cidade_request.nome
     db.commit()
     db.refresh(cidade)
     return cidade
@@ -413,13 +413,13 @@ def create_empresa(empresa: EmpresaRequest, db=Depends(get_db)):
 
 
 @app.put("/empresas/{empresa_id}")
-def update_empresa(empresa_id: int, empresa: EmpresaRequest, db=Depends(get_db)):
+def update_empresa(empresa_id: int, empresa_request: EmpresaRequest, db=Depends(get_db)):
     empresa = db.query(Empresa).filter(Empresa.id == empresa_id).first()
-    empresa.cnpj = empresa.cnpj
-    empresa.nome = empresa.nome
-    empresa.tipo = empresa.tipo
-    empresa.telefone = empresa.telefone
-    empresa.email = empresa.email
+    empresa.cnpj = empresa_request.cnpj
+    empresa.nome = empresa_request.nome
+    empresa.tipo = empresa_request.tipo
+    empresa.telefone = empresa_request.telefone
+    empresa.email = empresa_request.email
     db.commit()
     db.refresh(empresa)
     return empresa
@@ -463,15 +463,15 @@ def create_convenio(convenio: ConvenioRequest, db=Depends(get_db)):
 
 
 @app.put("/convenios/{convenio_id}")
-def update_convenio(convenio_id: int, convenio: ConvenioRequest, db=Depends(get_db)):
+def update_convenio(convenio_id: int, convenio_request: ConvenioRequest, db=Depends(get_db)):
     convenio = db.query(Convenio).filter(Convenio.id == convenio_id).first()
-    convenio.empresa_id = convenio.empresa_id
-    convenio.nome = convenio.nome
-    convenio.valor = convenio.valor
-    convenio.tipo_servico = convenio.tipo_servico
-    convenio.cobertura = convenio.cobertura
-    convenio.contato = convenio.contato
-    convenio.validade = convenio.validade
+    convenio.empresa_id = convenio_request.empresa_id
+    convenio.nome = convenio_request.nome
+    convenio.valor = convenio_request.valor
+    convenio.tipo_servico = convenio_request.tipo_servico
+    convenio.cobertura = convenio_request.cobertura
+    convenio.contato = convenio_request.contato
+    convenio.validade = convenio_request.validade
     db.commit()
     db.refresh(convenio)
     return convenio
@@ -510,12 +510,12 @@ def create_area_atuacao(area_atuacao: AreaAtuacaoRequest, db=Depends(get_db)):
 
 @app.put("/areas_atuacao/{area_atuacao_id}")
 def update_area_atuacao(
-    area_atuacao_id: int, area_atuacao: AreaAtuacaoRequest, db=Depends(get_db)
+    area_atuacao_id: int, area_atuacao_request: AreaAtuacaoRequest, db=Depends(get_db)
 ):
     area_atuacao = (
         db.query(AreaAtuacao).filter(AreaAtuacao.id == area_atuacao_id).first()
     )
-    area_atuacao.nome = area_atuacao.nome
+    area_atuacao.nome = area_atuacao_request.nome
     db.commit()
     db.refresh(area_atuacao)
     return area_atuacao
@@ -561,15 +561,15 @@ def create_unidade(unidade: UnidadeRequest, db=Depends(get_db)):
 
 
 @app.put("/unidades/{unidade_id}")
-def update_unidade(unidade_id: int, unidade: UnidadeRequest, db=Depends(get_db)):
+def update_unidade(unidade_id: int, unidade_request: UnidadeRequest, db=Depends(get_db)):
     unidade = db.query(Unidade).filter(Unidade.id == unidade_id).first()
-    unidade.empresa_id = unidade.empresa_id
-    unidade.area_atuacao_id = unidade.area_atuacao_id
-    unidade.nome = unidade.nome
-    unidade.telefone = unidade.telefone
-    unidade.email = unidade.email
-    unidade.tipo = unidade.tipo
-    unidade.capacidade = unidade.capacidade
+    unidade.empresa_id = unidade_request.empresa_id
+    unidade.area_atuacao_id = unidade_request.area_atuacao_id
+    unidade.nome = unidade_request.nome
+    unidade.telefone = unidade_request.telefone
+    unidade.email = unidade_request.email
+    unidade.tipo = unidade_request.tipo
+    unidade.capacidade = unidade_request.capacidade
     db.commit()
     db.refresh(unidade)
     return unidade
@@ -619,7 +619,7 @@ def create_endereco_unidade(
 @app.put("/enderecos_unidade/{endereco_unidade_id}")
 def update_endereco_unidade(
     endereco_unidade_id: int,
-    endereco_unidade: EnderecoUnidadeRequest,
+    endereco_unidade_request: EnderecoUnidadeRequest,
     db=Depends(get_db),
 ):
     endereco_unidade = (
@@ -627,11 +627,11 @@ def update_endereco_unidade(
         .filter(EnderecoUnidade.id == endereco_unidade_id)
         .first()
     )
-    endereco_unidade.unidade_id = endereco_unidade.unidade_id
-    endereco_unidade.rua = endereco_unidade.rua
-    endereco_unidade.numero = endereco_unidade.numero
-    endereco_unidade.cep = endereco_unidade.cep
-    endereco_unidade.cidade_id = endereco_unidade.cidade_id
+    endereco_unidade.unidade_id = endereco_unidade_request.unidade_id
+    endereco_unidade.rua = endereco_unidade_request.rua
+    endereco_unidade.numero = endereco_unidade_request.numero
+    endereco_unidade.cep = endereco_unidade_request.cep
+    endereco_unidade.cidade_id = endereco_unidade_request.cidade_id
     db.commit()
     db.refresh(endereco_unidade)
     return endereco_unidade
@@ -677,13 +677,13 @@ def create_medico(medico: MedicoRequest, db=Depends(get_db)):
 
 
 @app.put("/medicos/{medico_id}")
-def update_medico(medico_id: int, medico: MedicoRequest, db=Depends(get_db)):
+def update_medico(medico_id: int, medico_request: MedicoRequest, db=Depends(get_db)):
     medico = db.query(Medico).filter(Medico.id == medico_id).first()
-    medico.nome = medico.nome
-    medico.telefone = medico.telefone
-    medico.email = medico.email
-    medico.especialidade = medico.especialidade
-    medico.crm = medico.crm
+    medico.nome = medico_request.nome
+    medico.telefone = medico_request.telefone
+    medico.email = medico_request.email
+    medico.especialidade = medico_request.especialidade
+    medico.crm = medico_request.crm
     db.commit()
     db.refresh(medico)
     return medico
@@ -726,14 +726,14 @@ def create_medico_unidade(medico_unidade: MedicoUnidadeRequest, db=Depends(get_d
 
 @app.put("/medicos_unidade/{medico_unidade_id}")
 def update_medico_unidade(
-    medico_unidade_id: int, medico_unidade: MedicoUnidadeRequest, db=Depends(get_db)
+    medico_unidade_id: int, medico_unidade_request: MedicoUnidadeRequest, db=Depends(get_db)
 ):
     medico_unidade = (
         db.query(MedicoUnidade).filter(MedicoUnidade.id == medico_unidade_id).first()
     )
-    medico_unidade.medico_id = medico_unidade.medico_id
-    medico_unidade.unidade_id = medico_unidade.unidade_id
-    medico_unidade.horario_atendimento = medico_unidade.horario_atendimento
+    medico_unidade.medico_id = medico_unidade_request.medico_id
+    medico_unidade.unidade_id = medico_unidade_request.unidade_id
+    medico_unidade.horario_atendimento = medico_unidade_request.horario_atendimento
     db.commit()
     db.refresh(medico_unidade)
     return medico_unidade
@@ -774,12 +774,12 @@ def create_estado_civil(estado_civil: EstadoCivilRequest, db=Depends(get_db)):
 
 @app.put("/estados_civis/{estado_civil_id}")
 def update_estado_civil(
-    estado_civil_id: int, estado_civil: EstadoCivilRequest, db=Depends(get_db)
+    estado_civil_id: int, estado_civil_request: EstadoCivilRequest, db=Depends(get_db)
 ):
     estado_civil = (
         db.query(EstadoCivil).filter(EstadoCivil.id == estado_civil_id).first()
     )
-    estado_civil.nome = estado_civil.nome
+    estado_civil.nome = estado_civil_request.nome
     db.commit()
     db.refresh(estado_civil)
     return estado_civil
@@ -827,17 +827,17 @@ def create_cliente(cliente: ClienteRequest, db=Depends(get_db)):
 
 
 @app.put("/clientes/{cliente_id}")
-def update_cliente(cliente_id: int, cliente: ClienteRequest, db=Depends(get_db)):
+def update_cliente(cliente_id: int, cliente_request: ClienteRequest, db=Depends(get_db)):
     cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
-    cliente.rg = cliente.rg
-    cliente.nome = cliente.nome
-    cliente.sexo = cliente.sexo
-    cliente.telefone = cliente.telefone
-    cliente.email = cliente.email
-    cliente.data_nascimento = cliente.data_nascimento
-    cliente.cpf = cliente.cpf
-    cliente.convenio_id = cliente.convenio_id
-    cliente.estado_civil_id = cliente.estado_civil_id
+    cliente.rg = cliente_request.rg
+    cliente.nome = cliente_request.nome
+    cliente.sexo = cliente_request.sexo
+    cliente.telefone = cliente_request.telefone
+    cliente.email = cliente_request.email
+    cliente.data_nascimento = cliente_request.data_nascimento
+    cliente.cpf = cliente_request.cpf
+    cliente.convenio_id = cliente_request.convenio_id
+    cliente.estado_civil_id = cliente_request.estado_civil_id
     db.commit()
     db.refresh(cliente)
     return cliente
@@ -887,7 +887,7 @@ def create_endereco_cliente(
 @app.put("/enderecos_cliente/{endereco_cliente_id}")
 def update_endereco_cliente(
     endereco_cliente_id: int,
-    endereco_cliente: EnderecoClienteRequest,
+    endereco_cliente_request: EnderecoClienteRequest,
     db=Depends(get_db),
 ):
     endereco_cliente = (
@@ -895,11 +895,11 @@ def update_endereco_cliente(
         .filter(EnderecoCliente.id == endereco_cliente_id)
         .first()
     )
-    endereco_cliente.cliente_id = endereco_cliente.cliente_id
-    endereco_cliente.rua = endereco_cliente.rua
-    endereco_cliente.numero = endereco_cliente.numero
-    endereco_cliente.cep = endereco_cliente.cep
-    endereco_cliente.cidade_id = endereco_cliente.cidade_id
+    endereco_cliente.cliente_id = endereco_cliente_request.cliente_id
+    endereco_cliente.rua = endereco_cliente_request.rua
+    endereco_cliente.numero = endereco_cliente_request.numero
+    endereco_cliente.cep = endereco_cliente_request.cep
+    endereco_cliente.cidade_id = endereco_cliente_request.cidade_id
     db.commit()
     db.refresh(endereco_cliente)
     return endereco_cliente
@@ -940,10 +940,10 @@ def create_comorbidade(comorbidade: ComorbidadeRequest, db=Depends(get_db)):
 
 @app.put("/comorbidades/{comorbidade_id}")
 def update_comorbidade(
-    comorbidade_id: int, comorbidade: ComorbidadeRequest, db=Depends(get_db)
+    comorbidade_id: int, comorbidade_request: ComorbidadeRequest, db=Depends(get_db)
 ):
     comorbidade = db.query(Comorbidade).filter(Comorbidade.id == comorbidade_id).first()
-    comorbidade.nome = comorbidade.nome
+    comorbidade.nome = comorbidade_request.nome
     db.commit()
     db.refresh(comorbidade)
     return comorbidade
@@ -993,7 +993,7 @@ def create_historico_saude_cliente(
 @app.put("/historicos_saude_cliente/{historico_saude_cliente_id}")
 def update_historico_saude_cliente(
     historico_saude_cliente_id: int,
-    historico_saude_cliente: HistoricoSaudeClienteRequest,
+    historico_saude_cliente_request: HistoricoSaudeClienteRequest,
     db=Depends(get_db),
 ):
     historico_saude_cliente = (
@@ -1001,11 +1001,11 @@ def update_historico_saude_cliente(
         .filter(HistoricoSaudeCliente.id == historico_saude_cliente_id)
         .first()
     )
-    historico_saude_cliente.cliente_id = historico_saude_cliente.cliente_id
-    historico_saude_cliente.comorbidade_id = historico_saude_cliente.comorbidade_id
-    historico_saude_cliente.data_registro = historico_saude_cliente.data_registro
-    historico_saude_cliente.fuma = historico_saude_cliente.fuma
-    historico_saude_cliente.observacoes = historico_saude_cliente.observacoes
+    historico_saude_cliente.cliente_id = historico_saude_cliente_request.cliente_id
+    historico_saude_cliente.comorbidade_id = historico_saude_cliente_request.comorbidade_id
+    historico_saude_cliente.data_registro = historico_saude_cliente_request.data_registro
+    historico_saude_cliente.fuma = historico_saude_cliente_request.fuma
+    historico_saude_cliente.observacoes = historico_saude_cliente_request.observacoes
     db.commit()
     db.refresh(historico_saude_cliente)
     return historico_saude_cliente
@@ -1062,7 +1062,7 @@ def create_historico_hospital_cliente(
 @app.put("/historicos_hospital_cliente/{historico_hospital_cliente_id}")
 def update_historico_hospital_cliente(
     historico_hospital_cliente_id: int,
-    historico_hospital_cliente: HistoricoHospitalClienteRequest,
+    historico_hospital_cliente_request: HistoricoHospitalClienteRequest,
     db=Depends(get_db),
 ):
     historico_hospital_cliente = (
@@ -1070,18 +1070,18 @@ def update_historico_hospital_cliente(
         .filter(HistoricoHospitalCliente.id == historico_hospital_cliente_id)
         .first()
     )
-    historico_hospital_cliente.cliente_id = historico_hospital_cliente.cliente_id
-    historico_hospital_cliente.data_registro = historico_hospital_cliente.data_registro
+    historico_hospital_cliente.cliente_id = historico_hospital_cliente_request.cliente_id
+    historico_hospital_cliente.data_registro = historico_hospital_cliente_request.data_registro
     historico_hospital_cliente.historico_medico = (
-        historico_hospital_cliente.historico_medico
+        historico_hospital_cliente_request.historico_medico
     )
     historico_hospital_cliente.exames_realizados = (
-        historico_hospital_cliente.exames_realizados
+        historico_hospital_cliente_request.exames_realizados
     )
     historico_hospital_cliente.medicamentos_prescritos = (
-        historico_hospital_cliente.medicamentos_prescritos
+        historico_hospital_cliente_request.medicamentos_prescritos
     )
-    historico_hospital_cliente.observacoes = historico_hospital_cliente.observacoes
+    historico_hospital_cliente.observacoes = historico_hospital_cliente_request.observacoes
     db.commit()
     db.refresh(historico_hospital_cliente)
     return historico_hospital_cliente
